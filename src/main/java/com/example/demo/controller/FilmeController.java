@@ -2,11 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Filme;
 import com.example.demo.repository.FilmeRepository;
+import com.example.demo.dto.FilmeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/filmes")
@@ -16,31 +21,51 @@ public class FilmeController {
     @Autowired
     private FilmeRepository filmeRepository;
 
-    // GET: Listar todos os filmes
+    // ✅ GET: Listar filmes agrupados por gênero
     @GetMapping
-    public List<Filme> listarFilmes() {
-        return filmeRepository.findAll();
+    public Map<String, List<FilmeDTO>> listarFilmesPorGenero() {
+        List<FilmeDTO> filmesDTO = filmeRepository.findAll()
+                .stream()
+                .map(FilmeDTO::new)
+                .collect(Collectors.toList());
+
+        return filmesDTO.stream()
+                .collect(Collectors.groupingBy(FilmeDTO::getGenero));
     }
 
-    // POST: Adicionar um novo filme
+    // ✅ GET: Retornar somente a imagem (PNG) por ID
+    @GetMapping("/{id}/imagem")
+    public ResponseEntity<byte[]> buscarImagemPorId(@PathVariable Long id) {
+        Filme filme = filmeRepository.findById(id).orElse(null);
+
+        if (filme != null && filme.getImagem() != null) {
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
+                    .body(filme.getImagem());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // ✅ POST: Adicionar novo filme
     @PostMapping
     public Filme adicionarFilme(@RequestBody Filme filme) {
         return filmeRepository.save(filme);
     }
 
-    // GET: Buscar por ID
+    // ✅ GET: Buscar filme por ID
     @GetMapping("/{id}")
     public Filme buscarPorId(@PathVariable Long id) {
         return filmeRepository.findById(id).orElse(null);
     }
 
-    // DELETE: Remover filme
+    // ✅ DELETE: Remover filme por ID
     @DeleteMapping("/{id}")
     public void deletarFilme(@PathVariable Long id) {
         filmeRepository.deleteById(id);
     }
 
-    // PUT: Atualizar filme
+    // ✅ PUT: Atualizar filme por ID
     @PutMapping("/{id}")
     public Filme atualizarFilme(@PathVariable Long id, @RequestBody Filme filmeAtualizado) {
         return filmeRepository.findById(id).map(filme -> {
@@ -55,22 +80,4 @@ public class FilmeController {
             return filmeRepository.save(filme);
         }).orElse(null);
     }
-@GetMapping("/{id}/imagem")
-@ResponseBody
-public ResponseEntity<byte[]> buscarImagemPorId(@PathVariable Long id) {
-    return filmeRepository.findById(id)
-        .map(filme -> {
-            byte[] imagem = filme.getImagem();
-            if (imagem != null) {
-                return ResponseEntity
-                        .ok()
-                        .header("Content-Type", "image/jpeg") // ou "image/png" se for PNG
-                        .body(imagem);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        })
-        .orElseGet(() -> ResponseEntity.notFound().build());
-}
-
 }
