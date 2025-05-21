@@ -1,0 +1,109 @@
+/* Reset básico */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
+  color: #eee;
+}
+
+
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background-color: #222;
+  padding: 40px 50px;
+  border-radius: 8px;
+  width: 360px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+#meteflix {
+  all: unset;
+  color: #800080;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  display: block;
+  text-shadow: 0 0 6px #000;
+}
+
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-container label {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color:  #800080;
+
+}
+
+.login-container input {
+  padding: 12px 15px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background-color: #333;
+  color: #eee;
+  transition: background-color 0.3s ease;
+}
+
+.login-container input::placeholder {
+  color: #888;
+}
+
+.login-container input:focus {
+  background-color: #444;
+}
+
+.login-container button {
+  background-color:  #800080;
+  border: none;
+  padding: 14px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #f6121d;
+}
+
+.login-container p {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.login-message {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #ffa500;
+}
+.criar-link {
+  color: #d61ea0; /* tom de rosa, você pode ajustar */
+  cursor: pointer;
+  font-weight: bold;
+ 
+}
+
+.criar-link:hover {
+  color: #ff00ff; /* uma cor rosa mais forte quando passar o mouse, opcional */
+}

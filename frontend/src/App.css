@@ -1,0 +1,8 @@
+.app-background {
+  background: linear-gradient(90deg, #1a0033, #200020);
+  border: 2px solid #000000;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+

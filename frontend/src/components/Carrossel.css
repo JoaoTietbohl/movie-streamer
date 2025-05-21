@@ -1,0 +1,225 @@
+/* Fundo gradiente roxo/preto */
+.carrossel-bg {
+  background: linear-gradient(90deg, #1a0033, #000000);
+  min-height: 100vh;
+  padding: 0;   /* sem padding nenhum */
+}
+
+/* Navegação: setas e carrossel */
+.carrossel-navegacao {
+  display: flex;
+  align-items: center;
+}
+
+/* Contêiner do carrossel (div com overflow horizontal) */
+.carrossel-wrapper {
+  overflow-x: hidden; 
+  scroll-behavior: smooth;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  flex-grow: 1; /* ocupa todo espaço entre as setas */
+  margin: 0 10px;
+  scrollbar-width: none; /* Remove a scrollbar por completo */
+}
+
+/* Cards dos filmes */
+.filme-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0; /* impede de encolher */
+  border-radius: 8px;
+}
+
+.filme-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 0, 255, 0.6);
+}
+
+.seta {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #bb00ff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0 10px;
+  user-select: none;
+}
+
+.seta:hover {
+  color: #ff00ff;
+  transform: scale(1.2);
+}
+
+h2 {
+  font-weight: 700;
+  color: #bb00ff; 
+  text-shadow:
+    0 0 5px #bb00ff,
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff;
+}
+
+.filme-card .p-2 {
+  background-color: black;
+  padding: 8px; /* mantém o espaçamento */
+  border-radius: 0 0 8px 8px; /* arredonda só a parte de baixo */
+}
+
+.btn-todos {
+  background-color: #2a002a;
+  color: white;
+  border: 1px solid #bb00ff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  height: 38px;
+  transition: 0.3s;
+}
+
+.btn-todos::placeholder {
+  color: #ccc;
+}
+
+.btn-todos:focus {
+  outline: none;
+  box-shadow: 0 0 5px #bb00ff;
+}
+
+#input-busca::placeholder {
+  color: white;
+  opacity: 1; /* para garantir que a cor fique visível */
+}
+
+/* Modal */
+.modal-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-conteudo {
+  background: #121212;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.trailer-container iframe {
+  width: 100%;
+  height: 315px;
+  border-radius: 8px;
+}
+
+/* Botões de seta - posicionado ao lado do carrossel */
+.seta {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  padding: 0 8px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.seta:hover {
+  opacity: 1;
+}
+
+.seta:first-of-type {
+  left: 0;
+}
+
+.seta:last-of-type {
+  right: 0;
+}
+
+/* --- Novos estilos para alinhar busca + filtro + avatar e nome na mesma linha --- */
+
+/* Container geral que envolve filtro, busca e avatar+nome (adapte o className no JSX para usar essa classe) */
+.container-filtro-busca-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* permite quebrar linha se for tela pequena */
+  gap: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* Container filtro + busca juntos */
+.filtro-busca {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1;    /* para ocupar máximo espaço possível */
+  min-width: 0;    /* importante para permitir overflow e truncar textos */
+}
+
+/* Ajuste dos inputs do filtro e busca para não extrapolar */
+.FiltroGenero select,
+.PesquisaFilmes input {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #2a002a;
+  border: 1px solid #bb00ff;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.FiltroGenero select:focus,
+.PesquisaFilmes input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #bb00ff;
+}
+
+/* Container avatar + nome */
+.avatar-nome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap; /* evita quebra de linha */
+  flex-shrink: 0; /* não encolher */
+  font-weight: 700;
+  font-size: 18px;
+  margin-right: 60px; /* ⬅️ Adicionado para afastar da borda esquerda */
+}
+
+
+/* Avatar imagem */
+.avatar-nome img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.titulo-meteflix {
+  font-family: 'Orbitron', sans-serif;  /* Ou a fonte usada no Login.js */
+  font-size: 3rem;
+  color: #bb00ff;
+  text-align: center;
+  margin: 20px 0;
+  letter-spacing: 2px;
+}
+
+
